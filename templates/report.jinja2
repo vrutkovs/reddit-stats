@@ -1,0 +1,233 @@
+{% extends "base.jinja2" %}
+
+{% block content %}
+
+<!-- <pre>
+    'subreddit': {{subreddit}}
+    'start_date': {{start_date}}
+    'end_date': {{end_date}}
+    'post_threshold': {{post_threshold}}
+    'comment_threshold': {{comment_threshold}}
+    'total_posts': {{total_posts}}
+    'total_comments': {{total_comments}}
+    'total_users': {{total_users}}
+    'top_post_authors': {{top_post_authors}}
+    'total_posts_karma': {{total_posts_karma}}
+    'avg_posts_karma': {{avg_posts_karma}}
+    'total_post_comments': {{total_post_comments}}
+    'top_comment_authors': {{top_comment_authors}}
+    'avg_post_comments': {{avg_post_comments}}
+    'avg_comments_karma': {{avg_comments_karma}}
+    'top_comment_karma': {{top_comment_karma}}
+    'avg_comment_karma': {{avg_comment_karma}}
+    'worst_avg_comment_karma': {{worst_avg_comment_karma}}
+    'popular_flairs': {{popular_flairs}}
+    'most_popular_posts': {{most_popular_posts}}
+    'most_popular_comments': {{most_popular_comments}}
+    'least_popular_comments': {{least_popular_comments}}
+</pre> -->
+
+<div class="panel panel-default">
+  <div class="panel-heading">
+    <h4 class="panel-title">Report for <a href='https://www.reddit.com/r/{{subreddit}}'>/r/{{subreddit}}</a></h4>
+  </div>
+  <div class="panel-body">
+
+    <ul class="list-group">
+      <li class="list-group-item"><strong>Period</strong>: {{start_date.strftime('%Y.%m.%d')}} 00:00:00 - {{end_date.strftime('%Y.%m.%d')}} 00:00:00</li>
+      <li class="list-group-item"><strong>Total posts</strong>: {{total_posts}}</li>
+      <li class="list-group-item"><strong>Total comments</strong>: {{total_comments}}</li>
+      <li class="list-group-item"><strong>Total users</strong>: {{total_users}}</li>
+      <li class="list-group-item"><strong>Post threshold</strong>: {{post_threshold}}</li>
+      <li class="list-group-item"><strong>Comment threshold</strong>: {{comment_threshold}}</li>
+      <li class="list-group-item">
+        <strong>Posts created</strong>:
+        <table class="table table-striped table-bordered">
+          <thead>
+            <tr><th>User</th><th>Posts</th></tr>
+          </thead>
+          <tbody>
+            {% for user, posts in top_post_authors.items() %}
+            <tr><td>{{user}}</td><td>{{posts}}</td></tr>
+            {%endfor%}
+          </tbody>
+        </table>
+      </li>
+      <li class="list-group-item">
+        <strong>Total posts score</strong>:
+        <table class="table table-striped table-bordered">
+          <thead>
+            <tr><th>User</th><th>Score</th></tr>
+          </thead>
+          <tbody>
+            {% for user, karma in total_posts_karma.items() %}
+            <tr><td>{{user}}</td><td>{{karma}}</td></tr>
+            {%endfor%}
+          </tbody>
+        </table>
+      </li>
+      <li class="list-group-item">
+        <strong>Average post score</strong>:
+        <table class="table table-striped table-bordered">
+          <thead>
+            <tr><th>User</th><th>Score</th></tr>
+          </thead>
+          <tbody>
+            {% for user, karma in avg_posts_karma.items() %}
+            <tr><td>{{user}}</td><td>{{karma}}</td></tr>
+            {%endfor%}
+          </tbody>
+        </table>
+      </li>
+      <li class="list-group-item">
+        <strong>Total comments</strong>:
+        <table class="table table-striped table-bordered">
+          <thead>
+            <tr><th>User</th><th>Comments</th></tr>
+          </thead>
+          <tbody>
+            {% for user, comments in total_post_comments.items() %}
+            <tr><td>{{user}}</td><td>{{comments}}</td></tr>
+            {%endfor%}
+          </tbody>
+        </table>
+      </li>
+      <li class="list-group-item">
+        <strong>Average comments per post</strong>:
+        <table class="table table-striped table-bordered">
+          <thead>
+            <tr><th>User</th><th>Comments</th></tr>
+          </thead>
+          <tbody>
+            {% for user, comments in avg_post_comments.items() %}
+            <tr><td>{{user}}</td><td>{{comments}}</td></tr>
+            {%endfor%}
+          </tbody>
+        </table>
+      </li>
+      <li class="list-group-item">
+        <strong>Total comments</strong>:
+        <table class="table table-striped table-bordered">
+          <thead>
+            <tr><th>User</th><th>Comments</th></tr>
+          </thead>
+          <tbody>
+            {% for user, comments in top_comment_authors.items() %}
+            <tr><td>{{user}}</td><td>{{comments}}</td></tr>
+            {%endfor%}
+          </tbody>
+        </table>
+      </li>
+      <li class="list-group-item">
+        <strong>Total comments score</strong>:
+        <table class="table table-striped table-bordered">
+          <thead>
+            <tr><th>User</th><th>Comments</th></tr>
+          </thead>
+          <tbody>
+            {% for user, comments in top_comment_karma.items() %}
+            <tr><td>{{user}}</td><td>{{comments}}</td></tr>
+            {%endfor%}
+          </tbody>
+        </table>
+      </li>
+      <li class="list-group-item">
+        <strong>Average comment score</strong>:
+        <table class="table table-striped table-bordered">
+          <thead>
+            <tr><th>User</th><th>Comments</th></tr>
+          </thead>
+          <tbody>
+            {% for user, comments in avg_comments_karma.items() %}
+            <tr><td>{{user}}</td><td>{{comments}}</td></tr>
+            {%endfor%}
+          </tbody>
+        </table>
+      </li>
+      <li class="list-group-item">
+        <strong>Minimal average comment score</strong>:
+        <table class="table table-striped table-bordered">
+          <thead>
+            <tr><th>User</th><th>Comments</th></tr>
+          </thead>
+          <tbody>
+            {% for user, comments in worst_avg_comment_karma.items() %}
+            <tr><td>{{user}}</td><td>{{comments}}</td></tr>
+            {%endfor%}
+          </tbody>
+        </table>
+      </li>
+      <li class="list-group-item">
+        <strong>Popular flairs</strong>:
+        <table class="table table-striped table-bordered">
+          <thead>
+            <tr><th>Flair</th><th>#</th></tr>
+          </thead>
+          <tbody>
+            {% for flair, num in popular_flairs.items() %}
+            <tr><td>{{flair}}</td><td>{{num}}</td></tr>
+            {%endfor%}
+          </tbody>
+        </table>
+      </li>
+      <li class="list-group-item"></li>
+      <li class="list-group-item">
+        <strong>Most popular posts</strong>:
+        <table class="table table-striped table-bordered">
+          <thead>
+            <tr><th>Post</th><th>Score</th></tr>
+          </thead>
+          <tbody>
+            {% for id, data in most_popular_posts.items() %}
+            <tr><td><a href='https://redd.it/{{id}}'>{{data.title}}</a></td><td>{{data.score}}</td></tr>
+            {%endfor%}
+          </tbody>
+        </table>
+      </li>
+      <li class="list-group-item">
+        <strong>Most popular comments</strong>:
+        <table class="table table-striped table-bordered">
+          <thead>
+            <tr><th>Comment</th><th>Score</th></tr>
+          </thead>
+          <tbody>
+            {% for id, data in most_popular_comments.items() %}
+            <tr><td><a href='{{data.post_link}}{{id}}'>{{data.user}}</a></td><td>{{data.score}}</td></tr>
+            {%endfor%}
+          </tbody>
+        </table>
+      </li>
+      <li class="list-group-item">
+        <strong>Least popular comments</strong>:
+        <table class="table table-striped table-bordered">
+          <thead>
+            <tr><th>Comment</th><th>Score</th></tr>
+          </thead>
+          <tbody>
+            {% for id, data in least_popular_comments.items() %}
+            <tr><td><a href='{{data.post_link}}{{id}}'>{{data.user}}</a></td><td>{{data.score}}</td></tr>
+            {%endfor%}
+          </tbody>
+        </table>
+      </li>
+    </ul>
+
+    <div class="panel-group" id="reddit-code-accordion">
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <h4 class="panel-title">
+              <a data-toggle="collapse" data-parent="#reddit-code-accordion" href="#collapseRedditCode">
+                Reddit code
+              </a>
+            </h4>
+          </div>
+          <div id="collapseRedditCode" class="panel-collapse collapse">
+            <div class="panel-body">
+               <pre>{{reddit_text}}</pre>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+{% endblock %}

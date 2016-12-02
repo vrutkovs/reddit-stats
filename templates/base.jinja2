@@ -1,0 +1,19 @@
+<html>
+<head>
+    <link href="/static/bower_components/patternfly/dist/css/patternfly.min.css" rel="stylesheet" media="screen, print">
+    <link href="/static/bower_components/patternfly/dist/css/patternfly-additions.min.css" rel="stylesheet" media="screen, print">
+    <!-- jQuery -->
+    <script src="/static/bower_components/jquery/dist/jquery.min.js"></script>
+    <!-- Bootstrap -->
+    <script src="/static/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+    <!-- PatternFly -->
+    {% block extra_head %}{% endblock %}
+</head>
+
+<body>
+  <div class="container-fluid">
+    {% block content %}{% endblock %}
+  </div>
+  {% block footer %}{% endblock %}
+</body>
+</html>

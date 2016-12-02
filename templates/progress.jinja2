@@ -1,0 +1,74 @@
+{% extends "base.jinja2" %}
+
+{% block content %}
+  <div id="alert" class="toast-pf alert alert-danger" style="display: none; z-index: 10000">
+    <span class="pficon pficon-error-circle-o"></span>
+    <pre id="error"></pre>
+  </div>
+  <div class="modal" tabindex="-1" role="dialog" style='display: block'>
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h4 class="panel-title">Please wait, parsing posts for <a href='https://www.reddit.com/r/{{subreddit}}'>/r/{{subreddit}}</a></h4>
+        </div>
+        <div class="modal-body">
+          <div>
+            <div class="progress-description">
+              <strong id="progress-message"> </strong>
+            </div>
+            <div class="progress progress-striped active">
+              <div class="progress-bar" id="progress-bar" role="progressbar" style="width: 100%">
+                <span id="progress-value"> </span>
+              </div>
+            </div>
+          </div>
+
+          <div class="panel-group" id="log-accordion">
+            <div class="panel panel-default">
+              <div class="panel-heading">
+                <h4 class="panel-title">
+                  <a data-toggle="collapse" data-parent="#log-accordion" href="#collapseLog">
+                    Full Log
+                  </a>
+                </h4>
+              </div>
+              <div id="collapseLog" class="panel-collapse collapse">
+                <div class="panel-body">
+                   <pre id="log" style="max-height: 600px;"></pre>
+                </div>
+              </div>
+            </div>
+          </div>
+      </div>
+    </div>
+  </div>
+    
+    <script>
+      $(document).ready(function () {
+        var sock = new WebSocket('ws://' + window.location.host + '{{ws_url}}')
+        sock.onmessage = function(event) {
+            dta = $.parseJSON(event.data);
+            if ("log" in dta){
+              pre = $('#log')
+              pre.append(document.createTextNode(dta.log + '\n'))
+              pre.scrollTop(pre.prop("scrollHeight"))
+            }
+            if ("progress" in dta){
+              $('#progress-message').text(dta.log)
+              $('#progress-bar').css("width", dta.progress+"%")
+              $('#progress-value').text(dta.progress+"%")
+            }
+            if (Object.keys(dta)[0] == 'done'){
+                window.location.replace('{{redirect_url}}')
+            }
+            if (Object.keys(dta)[0] == 'error'){
+                $('#error').text(dta.error)
+                $('#alert').show()
+            }
+        };
+        sock.onopen = function(){
+          sock.send("ready")
+        }
+      });
+    </script>
+{% endblock %}
