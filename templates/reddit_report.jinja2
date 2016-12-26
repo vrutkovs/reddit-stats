@@ -21,7 +21,7 @@
 Пользователь|Постов
 :--|:--
 {%- for user, posts in top_post_authors.items() %}
-{{user}}|{{posts}}
+\{{user}}\|{{posts}}
 {%- endfor %}
 2 Общая карма постов:
 
@@ -97,14 +97,14 @@
 {%- endfor %}
 2 Комментарии с максимальным рейтингом:
 
-Комментарий|Рейтинг
+Пользователь|Рейтинг
 :--|:--
 {%- for id, data in most_popular_comments.items() %}
 [{{data.user}}]({{data.post_link}}{{id}})|{{data.score}}
 {%- endfor %}
 3 Комментарии с минимальным рейтингом:
 
-Комментарий|Рейтинг
+Пользователь|Рейтинг
 :--|:--
 {%- for id, data in least_popular_comments.items() %}
 [{{data.user}}]({{data.post_link}}{{id}})|{{data.score}}
