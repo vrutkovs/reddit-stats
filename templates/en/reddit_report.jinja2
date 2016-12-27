@@ -1,114 +1,114 @@
-**Отчет по /r/{{subreddit}}**
+**Report for /r/{{subreddit}}**
 
-**Общая информация**
+**General information**
 
-Период: {{start_date.strftime('%Y.%m.%d')}} 00:00:00 - {{end_date.strftime('%Y.%m.%d')}} 00:00:00
+Period: {{start_date.strftime('%Y.%m.%d')}} 00:00:00 - {{end_date.strftime('%Y.%m.%d')}} 00:00:00
 
-Всего постов: {{total_posts}}
+Total posts: {{total_posts}}
 
-Всего комментариев: {{total_comments}}
+Total comments: {{total_comments}}
 
-Пользователей участвовало: {{total_users}}
+Users participated: {{total_users}}
 
-Порог постов: {{post_threshold}}
+Post threshold: {{post_threshold}}
 
-Порог комментариев: {{comment_threshold}}
+Comments threshold: {{comment_threshold}}
 
-**Статистика по постам и комментариям**
+**Posts and comments statistics**
 
-1 Постов создано:
+1 Posts created:
 
-Пользователь|Постов
+User|Posts
 :--|:--
 {%- for user, posts in top_post_authors.items() %}
 /u/{{user}}|{{posts}}
 {%- endfor %}
-2 Общая карма постов:
+2 Posts score total:
 
-Пользователь|Карма
+User|Score
 :--|:--
 {%- for user, karma in total_posts_karma.items() %}
 /u/{{user}}|{{karma}}
 {%- endfor %}
-3 Средняя карма постов:
+3 Posts score average:
 
-Пользователь|Средняя карма
+User|Avg score
 :--|:--
 {%- for user, avg_karma in avg_posts_karma.items() %}
 /u/{{user}}|{{avg_karma}}
 {%- endfor %}
-4 Всего комментариев к созданным постам:
+4 Comments total for created posts:
 
-Пользователь|Комментариев
+User|Comments
 :--|:--
 {%- for user, comments in total_post_comments.items() %}
 /u/{{user}}|{{comments}}
 {%- endfor %}
-5 Комментариев к созданным постам в среднем:
+5 Comments average for created posts:
 
-Пользователь|Комментариев в среднем
+User|Avg comments
 :--|:--
 {%- for user, avg_comments in avg_post_comments.items() %}
 /u/{{user}}|{{avg_comments}}
 {%- endfor %}
-6 Всего комментариев:
+6 Comments by user total:
 
-Пользователь|Комментариев
+User|Comments
 :--|:--
 {%- for user, comments in top_comment_authors.items() %}
 /u/{{user}}|{{comments}}
 {%- endfor %}
-7 Общая карма комментариев:
+7 Comments score total:
 
-Пользователь|Карма
+User|Score
 :--|:--
 {%- for user, karma in top_comment_karma.items() %}
 /u/{{user}}|{{karma}}
 {%- endfor %}
-8 Средняя карма комментариев:
+8 Average comments score:
 
-Пользователь|Средняя карма
+User|Avg. score
 :--|:--
 {%- for user, avg_karma in avg_comments_karma.items() %}
 /u/{{user}}|{{avg_karma}}
 {%- endfor %}
-9 Минимальная средняя карма комментариев:
+9 Lowest avg comments score:
 
-Пользователь|Средняя карма
+User|Avg. score
 :--|:--
 {%- for user, avg_karma in worst_avg_comment_karma.items() %}
 /u/{{user}}|{{avg_karma}}
 {%- endfor %}
-10 Популярные флэйры:
+10 Popular flairs:
 
-Флэйр|Использовался
+Flair|Used
 :--|:--
 {%- for flair, num in popular_flairs.items() %}
 {{flair}}|{{num}}
 {%- endfor %}
-**Примечательные посты и комментарии**
+**Remarkable posts and comments**
 
-1 Посты с максимальным рейтингом:
+1 Top rated posts:
 
-Пост|Рейтинг
+Post|Score
 :--|:--
 {%- for id, data in most_popular_posts.items() %}
 [{{data.title}}](https://redd.it/{{id}})|{{data.score}}
 {%- endfor %}
-2 Комментарии с максимальным рейтингом:
+2 Top rated comments:
 
-Пользователь|Рейтинг
+User|Score
 :--|:--
 {%- for id, data in most_popular_comments.items() %}
 [{{data.user}}]({{data.post_link}}{{id}})|{{data.score}}
 {%- endfor %}
 3 Комментарии с минимальным рейтингом:
 
-Пользователь|Рейтинг
+User|Score
 :--|:--
 {%- for id, data in least_popular_comments.items() %}
 [{{data.user}}]({{data.post_link}}{{id}})|{{data.score}}
 {%- endfor %}
 
 
-*Если вы нашли ошибку - сообщите, пожалуйста, /u/roignac.*
+*Please contact /u/roignac if you've found a mistake*
