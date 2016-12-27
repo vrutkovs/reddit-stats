@@ -107,6 +107,7 @@ app.router.add_static('/static/', path='static', show_index=True, follow_symlink
 
 app.router.add_route('*', '/', root)
 app.router.add_route('*', '/{subreddit}', subreddit)
+app.router.add_route('*', '/{subreddit}/', subreddit)
 app.router.add_route('POST', '/{subreddit}/progress', progress)
 app.router.add_route('*', '/{subreddit}/progress/ws', ws)
 app.router.add_route('*', '/{subreddit}/report', report)
