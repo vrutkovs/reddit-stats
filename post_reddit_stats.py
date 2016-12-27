@@ -52,7 +52,6 @@ data = {
     'least_popular_comments': get_least_popular_comments(db)
 }
 text_to_post = get_reddit_text(jinja_env, data)
-print(text_to_post)
 
 reddit = get_reddit()
 reddit.read_only = False
