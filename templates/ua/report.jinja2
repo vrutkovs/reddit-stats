@@ -167,7 +167,7 @@
           </thead>
           <tbody>
             {% for id, data in most_popular_comments.items() %}
-            <tr><td><a href='{{data.post_link}}{{id}}'>{{data.user}}</a></td><td>{{data.score}}</td></tr>
+            <tr><td><a href='{{data.post_link}}{{id}}'>{{data.post_link}}{{id}}</a> - {{data.user}}</td><td>{{data.score}}</td></tr>
             {%endfor%}
           </tbody>
         </table>
@@ -180,7 +180,7 @@
           </thead>
           <tbody>
             {% for id, data in least_popular_comments.items() %}
-            <tr><td><a href='{{data.post_link}}{{id}}'>{{data.user}}</a></td><td>{{data.score}}</td></tr>
+            <tr><td><a href='{{data.post_link}}{{id}}'>{{data.post_link}}{{id}}</a> - {{data.user}}</td><td>{{data.score}}</td></tr>
             {%endfor%}
           </tbody>
         </table>

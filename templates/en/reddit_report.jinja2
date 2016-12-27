@@ -100,14 +100,14 @@ Post|Score
 User|Score
 :--|:--
 {%- for id, data in most_popular_comments.items() %}
-[{{data.user}}]({{data.post_link}}{{id}})|{{data.score}}
+{{data.post_link}}{{id}} - /u/{{data.user}}|{{data.score}}
 {%- endfor %}
 3 Комментарии с минимальным рейтингом:
 
 User|Score
 :--|:--
 {%- for id, data in least_popular_comments.items() %}
-[{{data.user}}]({{data.post_link}}{{id}})|{{data.score}}
+{{data.post_link}}{{id}} - /u/{{data.user}}|{{data.score}}
 {%- endfor %}
 
 
