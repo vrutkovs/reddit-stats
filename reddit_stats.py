@@ -127,8 +127,8 @@ def prepare_db(sub_name, from_date, to_date, ws=None):
     return db
 
 
-def get_reddit_text(jinja_env, data):
-    template = jinja_env.get_template('reddit_report.jinja2')
+def get_reddit_text(jinja_env, data, language='ru'):
+    template = jinja_env.get_template('{}/reddit_report.jinja2'.format(language))
     return template.render(**data)
 
 

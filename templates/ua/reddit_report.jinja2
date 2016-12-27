@@ -1,0 +1,114 @@
+**Отчет по /r/{{subreddit}}**
+
+**Общая информация**
+
+Период: {{start_date.strftime('%Y.%m.%d')}} 00:00:00 - {{end_date.strftime('%Y.%m.%d')}} 00:00:00
+
+Всего постов: {{total_posts}}
+
+Всего комментариев: {{total_comments}}
+
+Пользователей участвовало: {{total_users}}
+
+Порог постов: {{post_threshold}}
+
+Порог комментариев: {{comment_threshold}}
+
+**Статистика по постам и комментариям**
+
+1 Постов создано:
+
+Пользователь|Постов
+:--|:--
+{%- for user, posts in top_post_authors.items() %}
+/u/{{user}}|{{posts}}
+{%- endfor %}
+2 Общая карма постов:
+
+Пользователь|Карма
+:--|:--
+{%- for user, karma in total_posts_karma.items() %}
+/u/{{user}}|{{karma}}
+{%- endfor %}
+3 Средняя карма постов:
+
+Пользователь|Средняя карма
+:--|:--
+{%- for user, avg_karma in avg_posts_karma.items() %}
+/u/{{user}}|{{avg_karma}}
+{%- endfor %}
+4 Всего комментариев к созданным постам:
+
+Пользователь|Комментариев
+:--|:--
+{%- for user, comments in total_post_comments.items() %}
+/u/{{user}}|{{comments}}
+{%- endfor %}
+5 Комментариев к созданным постам в среднем:
+
+Пользователь|Комментариев в среднем
+:--|:--
+{%- for user, avg_comments in avg_post_comments.items() %}
+/u/{{user}}|{{avg_comments}}
+{%- endfor %}
+6 Всего комментариев:
+
+Пользователь|Комментариев
+:--|:--
+{%- for user, comments in top_comment_authors.items() %}
+/u/{{user}}|{{comments}}
+{%- endfor %}
+7 Общая карма комментариев:
+
+Пользователь|Карма
+:--|:--
+{%- for user, karma in top_comment_karma.items() %}
+/u/{{user}}|{{karma}}
+{%- endfor %}
+8 Средняя карма комментариев:
+
+Пользователь|Средняя карма
+:--|:--
+{%- for user, avg_karma in avg_comments_karma.items() %}
+/u/{{user}}|{{avg_karma}}
+{%- endfor %}
+9 Минимальная средняя карма комментариев:
+
+Пользователь|Средняя карма
+:--|:--
+{%- for user, avg_karma in worst_avg_comment_karma.items() %}
+/u/{{user}}|{{avg_karma}}
+{%- endfor %}
+10 Популярные флэйры:
+
+Флэйр|Использовался
+:--|:--
+{%- for flair, num in popular_flairs.items() %}
+{{flair}}|{{num}}
+{%- endfor %}
+**Примечательные посты и комментарии**
+
+1 Посты с максимальным рейтингом:
+
+Пост|Рейтинг
+:--|:--
+{%- for id, data in most_popular_posts.items() %}
+[{{data.title}}](https://redd.it/{{id}})|{{data.score}}
+{%- endfor %}
+2 Комментарии с максимальным рейтингом:
+
+Пользователь|Рейтинг
+:--|:--
+{%- for id, data in most_popular_comments.items() %}
+[{{data.user}}]({{data.post_link}}{{id}})|{{data.score}}
+{%- endfor %}
+3 Комментарии с минимальным рейтингом:
+
+Пользователь|Рейтинг
+:--|:--
+{%- for id, data in least_popular_comments.items() %}
+[{{data.user}}]({{data.post_link}}{{id}})|{{data.score}}
+{%- endfor %}
+
+
+*Если вы нашли ошибку - сообщите, пожалуйста, /u/roignac.*

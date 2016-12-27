@@ -30,6 +30,7 @@ async def progress(request):
     request.app['to_date'] = data['to']
     request.app['post_threshold'] = int(data['post-touchspin'])
     request.app['comment_threshold'] = int(data['comment-touchspin'])
+    request.app['language'] = data['language']
 
     set_thresholds(request.app['post_threshold'], request.app['comment_threshold'])
 
@@ -44,6 +45,7 @@ async def progress(request):
 
 @aiohttp_jinja2.template('report.jinja2')
 async def report(request):
+    language = request.app["language"]
     db = request.app['db']
     data = {
         'subreddit': request.match_info['subreddit'],
@@ -69,9 +71,11 @@ async def report(request):
         'most_popular_comments': get_most_popular_comments(db),
         'least_popular_comments': get_least_popular_comments(db)
     }
-    reddit_text = get_reddit_text(aiohttp_jinja2.get_env(app), data)
+    reddit_text = get_reddit_text(aiohttp_jinja2.get_env(app), data, language)
     data['reddit_text'] = reddit_text
-    return data
+    response = aiohttp_jinja2.render_template('{}/report.jinja2'.format(language),
+                                              request, data)
+    return response
 
 
 async def ws(request):

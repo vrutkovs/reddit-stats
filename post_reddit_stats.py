@@ -14,6 +14,7 @@ from reddit_stats import get_reddit, parse_submissions, get_reddit_text
 
 SUBREDDIT_TO_POST = 'bottesting'
 SUBREDDIT_TO_ANALYZE = 'liberta'
+LANGUAGE = 'ru'
 post_threshold = 3
 comment_threshold = 5
 
@@ -51,8 +52,9 @@ data = {
     'most_popular_comments': get_most_popular_comments(db),
     'least_popular_comments': get_least_popular_comments(db)
 }
-text_to_post = get_reddit_text(jinja_env, data)
+text_to_post = get_reddit_text(jinja_env, data, LANGUAGE)
 
 reddit = get_reddit()
 reddit.read_only = False
 reddit.subreddit(SUBREDDIT_TO_POST).submit('/r/liberta report', text_to_post)
+print("Report was posted")
