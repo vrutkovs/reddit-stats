@@ -7,6 +7,8 @@ RUN dnf install -y python3-pip git && \
 WORKDIR reddit-stats
 RUN pip3 install -r requirements.txt
 
+ADD praw.ini /reddit-stats
+
 EXPOSE 8080
 
 CMD ["python3", "webserver.py"]
