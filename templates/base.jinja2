@@ -14,6 +14,9 @@
   <div class="container-fluid">
     {% block content %}{% endblock %}
   </div>
-  {% block footer %}{% endblock %}
+  <div class="navbar navbar-fixed-bottom">
+    {% block footer %}{% endblock %}
+    <div class="text-muted pull-right">{% include 'commit.jinja' %}</div>
+  </div>
 </body>
 </html>

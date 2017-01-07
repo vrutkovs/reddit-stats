@@ -5,7 +5,8 @@ RUN dnf install -y python3-pip git && \
     dnf clean all
 
 WORKDIR reddit-stats
-RUN pip3 install -r requirements.txt
+RUN pip3 install -r requirements.txt && \
+    git log -1 --pretty=format:'%h - %s (%ci)' --abbrev-commit > templates/commit.jinja2
 
 ADD praw.ini /reddit-stats
 
