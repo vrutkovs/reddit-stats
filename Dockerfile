@@ -1,6 +1,7 @@
 FROM fedora:25
 
-RUN dnf install -y python3-pip git && \
+RUN dnf update -y && \
+    dnf install -y python3-pip git && \
     git clone https://github.com/vrutkovs/reddit-stats /reddit-stats && \
     dnf clean all
 
